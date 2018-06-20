@@ -29,9 +29,9 @@ public abstract class Cursus implements Serializable {
 		return naam;
 	}
 	
-	public Cursus(UUID id, String naam) {
+	public Cursus(String naam) {
 		this.naam = naam;
-		id = UUID.randomUUID();
+		id = UUID.randomUUID().toString();
 	}
 	protected Cursus() {
 	}

@@ -5,6 +5,8 @@ import static org.junit.Assert.assertEquals;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,9 @@ public class JpaCursusRepositoryTest extends AbstractTransactionalJUnit4SpringCo
 	@Autowired
 	private JpaCursusRepository repository;
 
+	@Autowired
+	private EntityManager manager;
+
 	private String idVanTestGroepsCursus() {
 		return super.jdbcTemplate.queryForObject("select id from groepscursussen where naam='testGroep'", String.class);
 	}
@@ -58,25 +63,21 @@ public class JpaCursusRepositoryTest extends AbstractTransactionalJUnit4SpringCo
 
 	@Test
 	public void createGroepsCursus() {
-		int aantalRecordsInCursussen = super.countRowsInTable(CURSUSSEN);
-		int aantalRecordsInGroepsCursussen = super.countRowsInTable(GROEPS_CURSUSSEN);
+		int aantalGroepsCursussen = super.countRowsInTable(GROEPS_CURSUSSEN);
 		GroepsCursus cursus = new GroepsCursus("testGroep2", EEN_DATUM, EEN_DATUM);
 		repository.create(cursus);
-		assertEquals(aantalRecordsInCursussen + 1, super.countRowsInTable(CURSUSSEN));
-		assertEquals(aantalRecordsInGroepsCursussen + 1, super.countRowsInTable(GROEPS_CURSUSSEN));
-		assertEquals(1, super.countRowsInTableWhere(CURSUSSEN, "id=" + cursus.getId()));
-		assertEquals(1, super.countRowsInTableWhere(GROEPS_CURSUSSEN, "id=" + cursus.getId()));
+		manager.flush();
+		assertEquals(aantalGroepsCursussen + 1, super.countRowsInTable(GROEPS_CURSUSSEN));
+		assertEquals(1, super.countRowsInTableWhere(GROEPS_CURSUSSEN, "id='" + cursus.getId() + "'"));
 	}
 
 	@Test
 	public void createIndividueleCursus() {
-		int aantalRecordsInCursussen = super.countRowsInTable(CURSUSSEN);
-		int aantalRecordsInIndividueleCursussen = super.countRowsInTable(INDIVIDUELE_CURSUSSEN);
+		int aantalIndividueleCursussen = super.countRowsInTable(INDIVIDUELE_CURSUSSEN);
 		IndividueleCursus cursus = new IndividueleCursus("testIndividueel2", 7);
 		repository.create(cursus);
-		assertEquals(aantalRecordsInCursussen + 1, super.countRowsInTable(CURSUSSEN));
-		assertEquals(aantalRecordsInIndividueleCursussen + 1, super.countRowsInTable(INDIVIDUELE_CURSUSSEN));
-		assertEquals(1, super.countRowsInTableWhere(CURSUSSEN, "id=" + cursus.getId()));
-		assertEquals(1, super.countRowsInTableWhere(INDIVIDUELE_CURSUSSEN, "id=" + cursus.getId()));
+		manager.flush();
+		assertEquals(aantalIndividueleCursussen + 1, super.countRowsInTable(INDIVIDUELE_CURSUSSEN));
+		assertEquals(1, super.countRowsInTableWhere(INDIVIDUELE_CURSUSSEN, "id='" + cursus.getId() + "'"));
 	}
 }

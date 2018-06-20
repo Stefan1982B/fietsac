@@ -21,8 +21,8 @@ public class IndividueleCursus extends Cursus {
 	}
 
 
-	public IndividueleCursus(UUID id, String naam, int duurtijd) {
-		super(id, naam);
+	public IndividueleCursus(String naam, int duurtijd) {
+		super(naam);
 		this.duurtijd = duurtijd;
 	}
 

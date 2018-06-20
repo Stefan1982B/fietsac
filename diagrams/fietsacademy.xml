@@ -3,8 +3,8 @@
 		<entity-name>be.vdab.fietsacademy.entities.Docent</entity-name>
 		<entity-width>120</entity-width>
 		<entity-height>188</entity-height>
-		<entity-X-Coordinate>600</entity-X-Coordinate>
-		<entity-Y-Coordinate>40</entity-Y-Coordinate>
+		<entity-X-Coordinate>760</entity-X-Coordinate>
+		<entity-Y-Coordinate>30</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -14,8 +14,52 @@
 		<entity-name>be.vdab.fietsacademy.entities.GroepsCursus</entity-name>
 		<entity-width>120</entity-width>
 		<entity-height>90</entity-height>
-		<entity-X-Coordinate>140</entity-X-Coordinate>
-		<entity-Y-Coordinate>350</entity-Y-Coordinate>
+		<entity-X-Coordinate>560</entity-X-Coordinate>
+		<entity-Y-Coordinate>90</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>be.vdab.fietsacademy.entities.IndividueleCursus</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>70</entity-height>
+		<entity-X-Coordinate>371</entity-X-Coordinate>
+		<entity-Y-Coordinate>100</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>be.vdab.fietsacademy.entities.Cursus</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>108</entity-height>
+		<entity-X-Coordinate>441</entity-X-Coordinate>
+		<entity-Y-Coordinate>300</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>be.vdab.fietsacademy.valueObjects.Adres</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>130</entity-height>
+		<entity-X-Coordinate>100</entity-X-Coordinate>
+		<entity-Y-Coordinate>360</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>be.vdab.fietsacademy.entities.Campus</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>128</entity-height>
+		<entity-X-Coordinate>70</entity-X-Coordinate>
+		<entity-Y-Coordinate>42</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
