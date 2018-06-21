@@ -18,6 +18,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import be.vdab.fietsacademy.enums.Geslacht;
@@ -31,13 +32,14 @@ public class Docent implements Serializable {
 	protected Docent() {
 	}
 
-	public Docent(String voornaam, String familienaam, BigDecimal wedde, String emailAdres, Geslacht geslacht) {
+	public Docent(String voornaam, String familienaam, BigDecimal wedde, String emailAdres, Geslacht geslacht /*Campus campus*/) {
 		this.voornaam = voornaam;
 		this.familienaam = familienaam;
 		this.wedde = wedde;
 		this.emailAdres = emailAdres;
 		this.geslacht = geslacht;
 		this.bijnamen = new LinkedHashSet<>();
+//		setCampus(campus);
 	}
 
 	@Id
@@ -53,6 +55,20 @@ public class Docent implements Serializable {
 	@CollectionTable(name = "docentenbijnamen", joinColumns = @JoinColumn(name = "docentid"))
 	@Column(name = "bijnaam")
 	private Set<String> bijnamen;
+//	@ManyToOne(optional = false) 
+//	@JoinColumn(name = "campusid") 
+//	private Campus campus;
+
+//	public Campus getCampus() {
+//		return campus;
+//	}
+//
+//	public void setCampus(Campus campus) {
+//		if (campus == null) {
+//			throw new NullPointerException();
+//		}
+//		this.campus = campus;
+//	}
 
 	public Geslacht getGeslacht() {
 		return geslacht;
@@ -87,11 +103,11 @@ public class Docent implements Serializable {
 	}
 
 	public Set<String> getBijnamen() {
-		return Collections.unmodifiableSet(bijnamen);		
+		return Collections.unmodifiableSet(bijnamen);
 	}
 
 	public boolean addBijnaam(String bijnaam) {
-		if(bijnaam.trim().isEmpty()) {
+		if (bijnaam.trim().isEmpty()) {
 			throw new IllegalArgumentException();
 		}
 		return bijnamen.add(bijnaam);

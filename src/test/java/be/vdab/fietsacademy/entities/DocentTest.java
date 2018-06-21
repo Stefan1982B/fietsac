@@ -10,13 +10,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 import be.vdab.fietsacademy.enums.Geslacht;
+import be.vdab.fietsacademy.valueObjects.Adres;
 
 public class DocentTest {
 	private Docent docent;
+	private Campus campus1;
 
 	@Before
 	public void before() {
-		docent = new Docent("test", "test", ORIGINELEWEDDE, "test@fietsacademy.be", Geslacht.MAN);
+		campus1 = new Campus("test", new Adres("test", "test","test","test"));
+		docent = new Docent("test", "test", ORIGINELEWEDDE, "test@fietsacademy.be", Geslacht.MAN, campus1);
 	}
 
 	private final static BigDecimal ORIGINELEWEDDE = BigDecimal.valueOf(100);

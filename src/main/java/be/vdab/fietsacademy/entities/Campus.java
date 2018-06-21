@@ -1,15 +1,23 @@
 package be.vdab.fietsacademy.entities;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import be.vdab.fietsacademy.valueObjects.Adres;
+import be.vdab.fietsacademy.valueObjects.TelefoonNr;
 
 @Entity
 @Table(name = "campussen")
@@ -22,6 +30,27 @@ public class Campus implements Serializable {
 
 	@Embedded
 	private Adres adres;
+
+	@ElementCollection
+	@CollectionTable(name = "campussentelefoonnrs", joinColumns = @JoinColumn(name = "campusId"))
+	@OrderBy("fax")
+	private Set<TelefoonNr> telefoonNrs;
+
+	@OneToMany
+	@JoinColumn(name = "campusid")
+	@OrderBy("voornaam, familienaam")
+	private Set<Docent> docenten;
+
+	public Set<Docent> getDocenten() {
+		return Collections.unmodifiableSet(docenten);
+	}
+
+	public boolean add(Docent docent) {
+		if (docent == null) {
+			throw new NullPointerException();
+		}
+		return docenten.add(docent);
+	}
 
 	public long getId() {
 		return id;
@@ -38,9 +67,14 @@ public class Campus implements Serializable {
 	public Campus(String naam, Adres adres) {
 		this.naam = naam;
 		this.adres = adres;
+		this.telefoonNrs = new LinkedHashSet<>();
 	}
 
 	protected Campus() {
+	}
+
+	public Set<TelefoonNr> getTelefoonNrs() {
+		return Collections.unmodifiableSet(telefoonNrs);
 	}
 
 }
