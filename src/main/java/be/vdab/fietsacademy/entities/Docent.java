@@ -14,6 +14,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,15 +33,15 @@ public class Docent implements Serializable {
 	protected Docent() {
 	}
 
-	public Docent(String voornaam, String familienaam, BigDecimal wedde, String emailAdres,
-			Geslacht geslacht /* Campus campus */) {
+	public Docent(String voornaam, String familienaam, BigDecimal wedde, String emailAdres, Geslacht geslacht,
+			Campus campus) {
 		this.voornaam = voornaam;
 		this.familienaam = familienaam;
 		this.wedde = wedde;
 		this.emailAdres = emailAdres;
 		this.geslacht = geslacht;
 		this.bijnamen = new LinkedHashSet<>();
-		// setCampus(campus);
+		setCampus(campus);
 	}
 
 	@Id
@@ -56,20 +57,23 @@ public class Docent implements Serializable {
 	@CollectionTable(name = "docentenbijnamen", joinColumns = @JoinColumn(name = "docentid"))
 	@Column(name = "bijnaam")
 	private Set<String> bijnamen;
-	// @ManyToOne(fetch = FetchType.LAZY, optional = false)
-	// @JoinColumn(name = "campusid")
-	// private Campus campus;
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "campusid")
+	private Campus campus;
 
-	// public Campus getCampus() {
-	// return campus;
-	// }
-	//
-	// public void setCampus(Campus campus) {
-	// if (campus == null) {
-	// throw new NullPointerException();
-	// }
-	// this.campus = campus;
-	// }
+	public Campus getCampus() {
+		return campus;
+	}
+
+	public void setCampus(Campus campus) {
+		if (campus == null) {
+			throw new NullPointerException();
+		}
+		if (!campus.getDocenten().contains(this)) {
+			campus.add(this);
+		}
+		this.campus = campus;
+	}
 
 	public Geslacht getGeslacht() {
 		return geslacht;

@@ -18,13 +18,15 @@ public class DocentTest {
 	private Campus campus1;
 	private Docent docent2;
 	private Docent nogEensDocent;
+	private Campus campus2;
 
 	@Before
 	public void before() {
 		campus1 = new Campus("test", new Adres("test", "test", "test", "test"));
-		docent = new Docent("test", "test", ORIGINELEWEDDE, "test@fietsacademy.be", Geslacht.MAN);
-		docent2 = new Docent("test2", "test2", ORIGINELEWEDDE, "test2@fietsacademy.be", Geslacht.MAN);
-		nogEensDocent = new Docent("test", "test", ORIGINELEWEDDE, "test@fietsacademy.be", Geslacht.MAN);
+		campus2 = new Campus("test2", new Adres("test2", "test2", "test2", "test2"));
+		docent = new Docent("test", "test", ORIGINELEWEDDE, "test@fietsacademy.be", Geslacht.MAN, campus1);
+		docent2 = new Docent("test2", "test2", ORIGINELEWEDDE, "test2@fietsacademy.be", Geslacht.MAN, campus1);
+		nogEensDocent = new Docent("test", "test", ORIGINELEWEDDE, "test@fietsacademy.be", Geslacht.MAN, campus1);
 	}
 
 	private final static BigDecimal ORIGINELEWEDDE = BigDecimal.valueOf(100);
@@ -89,8 +91,8 @@ public class DocentTest {
 
 	@Test
 	public void meerdereDocentenKunnenTotDezelfdeCampusBehoren() {
-		assertTrue(campus1.add(docent));
-		assertTrue(campus1.add(docent2));
+		assertTrue(campus1.getDocenten().contains(docent));
+		assertTrue(campus1.getDocenten().contains(docent2));
 	}
 
 	@Test
@@ -116,6 +118,22 @@ public class DocentTest {
 	@Test
 	public void gelijkeDocentenGevenDezelfdeHashCode() {
 		assertEquals(docent.hashCode(), nogEensDocent.hashCode());
+	}
+
+	@Test
+	public void docent1KomtVoorInCampus1() {
+		assertEquals(docent.getCampus(), campus1);
+		assertEquals(2, campus1.getDocenten().size());
+		assertTrue(campus1.getDocenten().contains(docent));
+	}
+
+	@Test
+	public void docent1VerhuistNaarCampus2() {
+		docent.setCampus(campus2);
+		assertEquals(docent.getCampus(), campus2);
+		assertEquals(1, campus1.getDocenten().size());
+		assertEquals(1, campus2.getDocenten().size());
+		assertTrue(campus2.getDocenten().contains(docent));
 	}
 
 }
