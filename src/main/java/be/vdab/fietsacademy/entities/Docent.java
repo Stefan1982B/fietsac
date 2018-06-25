@@ -32,14 +32,15 @@ public class Docent implements Serializable {
 	protected Docent() {
 	}
 
-	public Docent(String voornaam, String familienaam, BigDecimal wedde, String emailAdres, Geslacht geslacht /*Campus campus*/) {
+	public Docent(String voornaam, String familienaam, BigDecimal wedde, String emailAdres,
+			Geslacht geslacht /* Campus campus */) {
 		this.voornaam = voornaam;
 		this.familienaam = familienaam;
 		this.wedde = wedde;
 		this.emailAdres = emailAdres;
 		this.geslacht = geslacht;
 		this.bijnamen = new LinkedHashSet<>();
-//		setCampus(campus);
+		// setCampus(campus);
 	}
 
 	@Id
@@ -55,20 +56,20 @@ public class Docent implements Serializable {
 	@CollectionTable(name = "docentenbijnamen", joinColumns = @JoinColumn(name = "docentid"))
 	@Column(name = "bijnaam")
 	private Set<String> bijnamen;
-//	@ManyToOne(optional = false) 
-//	@JoinColumn(name = "campusid") 
-//	private Campus campus;
+	// @ManyToOne(fetch = FetchType.LAZY, optional = false)
+	// @JoinColumn(name = "campusid")
+	// private Campus campus;
 
-//	public Campus getCampus() {
-//		return campus;
-//	}
-//
-//	public void setCampus(Campus campus) {
-//		if (campus == null) {
-//			throw new NullPointerException();
-//		}
-//		this.campus = campus;
-//	}
+	// public Campus getCampus() {
+	// return campus;
+	// }
+	//
+	// public void setCampus(Campus campus) {
+	// if (campus == null) {
+	// throw new NullPointerException();
+	// }
+	// this.campus = campus;
+	// }
 
 	public Geslacht getGeslacht() {
 		return geslacht;
@@ -115,6 +116,22 @@ public class Docent implements Serializable {
 
 	public boolean removeBijnaam(String bijnaam) {
 		return bijnamen.remove(bijnaam);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Docent)) {
+			return false;
+		}
+		if (emailAdres == null) {
+			return false;
+		}
+		return emailAdres.equalsIgnoreCase(((Docent) obj).emailAdres);
+	}
+
+	@Override
+	public int hashCode() {
+		return emailAdres == null ? 0 : emailAdres.toLowerCase().hashCode();
 	}
 
 }

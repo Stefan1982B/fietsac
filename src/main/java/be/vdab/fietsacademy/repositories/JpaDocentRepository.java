@@ -75,8 +75,9 @@ public class JpaDocentRepository implements DocentRepository {
 
 	@Override
 	public int algemeneOpslag(BigDecimal percentage) {
-		BigDecimal factor = BigDecimal.ONE.add(percentage.divide(BigDecimal.valueOf(100)));
-		return manager.createNamedQuery("Docent.algemeneOpslag").setParameter("factor", factor)
+		BigDecimal factor =   BigDecimal.ONE.add(percentage.divide(BigDecimal.valueOf(100))); 
+		return manager.createNamedQuery("Docent.algemeneOpslag")   
+				.setParameter("factor", factor)   
 				.executeUpdate();
-	}
+}
 }

@@ -2,6 +2,7 @@ package be.vdab.fietsacademy.entities;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
@@ -15,11 +16,15 @@ import be.vdab.fietsacademy.valueObjects.Adres;
 public class DocentTest {
 	private Docent docent;
 	private Campus campus1;
+	private Docent docent2;
+	private Docent nogEensDocent;
 
 	@Before
 	public void before() {
-		campus1 = new Campus("test", new Adres("test", "test","test","test"));
-		docent = new Docent("test", "test", ORIGINELEWEDDE, "test@fietsacademy.be", Geslacht.MAN, campus1);
+		campus1 = new Campus("test", new Adres("test", "test", "test", "test"));
+		docent = new Docent("test", "test", ORIGINELEWEDDE, "test@fietsacademy.be", Geslacht.MAN);
+		docent2 = new Docent("test2", "test2", ORIGINELEWEDDE, "test2@fietsacademy.be", Geslacht.MAN);
+		nogEensDocent = new Docent("test", "test", ORIGINELEWEDDE, "test@fietsacademy.be", Geslacht.MAN);
 	}
 
 	private final static BigDecimal ORIGINELEWEDDE = BigDecimal.valueOf(100);
@@ -80,6 +85,37 @@ public class DocentTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void eenBijnaamMetEnkelSpatiesToevoegenKanNiet() {
 		docent.addBijnaam(" ");
+	}
+
+	@Test
+	public void meerdereDocentenKunnenTotDezelfdeCampusBehoren() {
+		assertTrue(campus1.add(docent));
+		assertTrue(campus1.add(docent2));
+	}
+
+	@Test
+	public void docentenZijnGelijkAlsHunEmailAdressenGelijkZijn() {
+		assertEquals(docent, nogEensDocent);
+	}
+
+	@Test
+	public void docentenZijnVerschillendAlsHunEmailAdressenVerschillen() {
+		assertNotEquals(docent, docent2);
+	}
+
+	@Test
+	public void eenDocentVerschiltVanNull() {
+		assertNotEquals(docent, null);
+	}
+
+	@Test
+	public void eenDocentVerschiltVanEenAnderTypeObject() {
+		assertNotEquals(docent, "");
+	}
+
+	@Test
+	public void gelijkeDocentenGevenDezelfdeHashCode() {
+		assertEquals(docent.hashCode(), nogEensDocent.hashCode());
 	}
 
 }
