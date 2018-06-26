@@ -19,6 +19,7 @@ public class DocentTest {
 	private Docent docent2;
 	private Docent nogEensDocent;
 	private Campus campus2;
+	private Verantwoordelijkheid verantwoordelijkheid1;
 
 	@Before
 	public void before() {
@@ -27,6 +28,7 @@ public class DocentTest {
 		docent = new Docent("test", "test", ORIGINELEWEDDE, "test@fietsacademy.be", Geslacht.MAN, campus1);
 		docent2 = new Docent("test2", "test2", ORIGINELEWEDDE, "test2@fietsacademy.be", Geslacht.MAN, campus1);
 		nogEensDocent = new Docent("test", "test", ORIGINELEWEDDE, "test@fietsacademy.be", Geslacht.MAN, campus1);
+		verantwoordelijkheid1 = new Verantwoordelijkheid("EHBO");
 	}
 
 	private final static BigDecimal ORIGINELEWEDDE = BigDecimal.valueOf(100);
@@ -134,6 +136,23 @@ public class DocentTest {
 		assertEquals(1, campus1.getDocenten().size());
 		assertEquals(1, campus2.getDocenten().size());
 		assertTrue(campus2.getDocenten().contains(docent));
+	}
+
+	@Test
+	public void verantwoordelijkheidToevoegen() {
+		assertTrue(docent.getVerantwoordelijkheden().isEmpty());
+		assertTrue(docent.add(verantwoordelijkheid1));
+		assertEquals(1, docent.getVerantwoordelijkheden().size());
+		assertTrue(docent.getVerantwoordelijkheden().contains(verantwoordelijkheid1));
+		assertEquals(1, verantwoordelijkheid1.getDocenten().size());
+		assertTrue(verantwoordelijkheid1.getDocenten().contains(docent));
+	}
+
+	public void verantwoordelijkheidVerwijderen() {
+		assertTrue(docent.add(verantwoordelijkheid1));
+		assertTrue(docent.remove(verantwoordelijkheid1));
+		assertTrue(docent.getVerantwoordelijkheden().isEmpty());
+		assertTrue(verantwoordelijkheid1.getDocenten().isEmpty());
 	}
 
 }
