@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 
 import org.springframework.stereotype.Repository;
 
@@ -80,4 +81,9 @@ public class JpaDocentRepository implements DocentRepository {
 				.setParameter("factor", factor)   
 				.executeUpdate();
 }
+
+	@Override
+	public Optional<Docent> readWithLock(long id) {
+		return Optional.ofNullable(manager.find(Docent.class, id, LockModeType.PESSIMISTIC_WRITE));
+	}
 }
