@@ -46,7 +46,7 @@ public class JpaDocentRepository implements DocentRepository {
 	@Override
 	public List<Docent> findByWeddeBetween(BigDecimal van, BigDecimal tot) {
 		return manager.createNamedQuery("Docent.findByWeddeBetween", Docent.class).setParameter("van", van)
-				.setParameter("tot", tot).getResultList();
+				.setParameter("tot", tot).setHint("javax.persistence.loadgraph", manager.createEntityGraph(Docent.MET_CAMPUS)).getResultList();
 	}
 
 	@Override

@@ -3,8 +3,8 @@
 		<entity-name>be.vdab.fietsacademy.entities.Docent</entity-name>
 		<entity-width>120</entity-width>
 		<entity-height>266</entity-height>
-		<entity-X-Coordinate>660</entity-X-Coordinate>
-		<entity-Y-Coordinate>450</entity-Y-Coordinate>
+		<entity-X-Coordinate>840</entity-X-Coordinate>
+		<entity-Y-Coordinate>425</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -14,8 +14,8 @@
 		<entity-name>be.vdab.fietsacademy.entities.Campus</entity-name>
 		<entity-width>120</entity-width>
 		<entity-height>186</entity-height>
-		<entity-X-Coordinate>68</entity-X-Coordinate>
-		<entity-Y-Coordinate>210</entity-Y-Coordinate>
+		<entity-X-Coordinate>100</entity-X-Coordinate>
+		<entity-Y-Coordinate>160</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -80,8 +80,8 @@
 		<entity-name>be.vdab.fietsacademy.entities.Verantwoordelijkheid</entity-name>
 		<entity-width>120</entity-width>
 		<entity-height>146</entity-height>
-		<entity-X-Coordinate>293</entity-X-Coordinate>
-		<entity-Y-Coordinate>640</entity-Y-Coordinate>
+		<entity-X-Coordinate>301</entity-X-Coordinate>
+		<entity-Y-Coordinate>567</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
